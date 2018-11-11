@@ -15,6 +15,7 @@
 #include "clock.h"
 #include "gpio.h"
 #include "delay.h"
+#include "st7735.h"
 
 /*!****************************************************************************
 * User define

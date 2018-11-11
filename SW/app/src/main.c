@@ -21,6 +21,7 @@
 void main(void){
     initClocks();
     initGpios();
+//    initB();
     
     while(1){
     }

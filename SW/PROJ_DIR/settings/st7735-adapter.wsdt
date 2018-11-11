@@ -2,242 +2,79 @@
 
 <Workspace>
   <ConfigDictionary>
-    <CurrentConfigs>
-      <Project>st7735-adapter/Debug</Project>
-    </CurrentConfigs>
-  </ConfigDictionary>
+    
+  <CurrentConfigs><Project>st7735-adapter/Debug</Project></CurrentConfigs></ConfigDictionary>
   <Desktop>
     <Static>
       <Workspace>
         <ColumnWidths>
-          <Column0>198</Column0>
-          <Column1>27</Column1>
-          <Column2>27</Column2>
-          <Column3>27</Column3>
-        </ColumnWidths>
+          
+          
+          
+          
+        <Column0>198</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
       <Debug-Log>
-        <ColumnWidth0>20</ColumnWidth0>
-        <ColumnWidth1>1301</ColumnWidth1>
-      </Debug-Log>
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1301</ColumnWidth1></Debug-Log>
       <Build>
-        <ColumnWidth0>23</ColumnWidth0>
-        <ColumnWidth1>973</ColumnWidth1>
-        <ColumnWidth2>259</ColumnWidth2>
-        <ColumnWidth3>64</ColumnWidth3>
-      </Build>
+        
+        
+        
+        
+      <ColumnWidth0>23</ColumnWidth0><ColumnWidth1>973</ColumnWidth1><ColumnWidth2>259</ColumnWidth2><ColumnWidth3>64</ColumnWidth3></Build>
       <Select-Ambiguous-Definitions>
-        <ColumnWidth0>468</ColumnWidth0>
-        <ColumnWidth1>66</ColumnWidth1>
-        <ColumnWidth2>802</ColumnWidth2>
-      </Select-Ambiguous-Definitions>
+        
+        
+        
+      <ColumnWidth0>468</ColumnWidth0><ColumnWidth1>66</ColumnWidth1><ColumnWidth2>802</ColumnWidth2></Select-Ambiguous-Definitions>
       <TerminalIO/>
     </Static>
     <Windows>
-      <Wnd2>
+      
+      
+    <Wnd0>
         <Tabs>
           <Tab>
             <Identity>TabID-30988-7431</Identity>
             <TabName>Workspace</TabName>
             <Factory>Workspace</Factory>
             <Session>
-              <NodeDict>
-                <ExpandedNode>st7735-adapter</ExpandedNode>
-                <ExpandedNode>st7735-adapter/app</ExpandedNode>
-                <ExpandedNode>st7735-adapter/drivers</ExpandedNode>
-              </NodeDict>
-            </Session>
+              
+            <NodeDict><ExpandedNode>st7735-adapter</ExpandedNode><ExpandedNode>st7735-adapter/app</ExpandedNode><ExpandedNode>st7735-adapter/drivers</ExpandedNode></NodeDict></Session>
           </Tab>
-        </Tabs>
-        <SelectedTab>0</SelectedTab>
-      </Wnd2>
-      <Wnd3>
-        <Tabs>
-          <Tab>
+        <Tab>
             <Identity>TabID-374-7800</Identity>
             <TabName>Debug Log</TabName>
             <Factory>Debug-Log</Factory>
             <Session/>
-          </Tab>
-          <Tab>
+          </Tab><Tab>
             <Identity>TabID-1963-9612</Identity>
             <TabName>Build</TabName>
             <Factory>Build</Factory>
             <Session/>
-          </Tab>
-          <Tab>
+          </Tab><Tab>
             <Identity>TabID-2382-10628</Identity>
             <TabName>Ambiguous Definitions</TabName>
             <Factory>Select-Ambiguous-Definitions</Factory>
             <Session/>
-          </Tab>
-        </Tabs>
-        <SelectedTab>1</SelectedTab>
-      </Wnd3>
-    </Windows>
+          </Tab></Tabs>
+        
+      <SelectedTab>2</SelectedTab></Wnd0></Windows>
     <Editor>
-      <Pane>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\app\src\main.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>0</YPos2>
-          <SelStart2>504</SelStart2>
-          <SelEnd2>504</SelEnd2>
-        </Tab>
-        <ActiveTab>0</ActiveTab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\app\inc\main.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>5</YPos2>
-          <SelStart2>384</SelStart2>
-          <SelEnd2>384</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\drivers\src\gpio.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>15</YPos2>
-          <SelStart2>889</SelStart2>
-          <SelEnd2>890</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\drivers\inc\gpio.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>69</YPos2>
-          <SelStart2>2773</SelStart2>
-          <SelEnd2>2784</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\drivers\src\clock.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>1</YPos2>
-          <SelStart2>288</SelStart2>
-          <SelEnd2>288</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\drivers\inc\clock.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>0</YPos2>
-          <SelStart2>475</SelStart2>
-          <SelEnd2>475</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\drivers\src\delay.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>6</YPos2>
-          <SelStart2>567</SelStart2>
-          <SelEnd2>575</SelEnd2>
-        </Tab>
-      </Pane>
-      <ActivePane>0</ActivePane>
-      <Sizes>
-        <Pane>
-          <X>1000000</X>
-          <Y>1000000</Y>
-        </Pane>
-      </Sizes>
-      <SplitMode>1</SplitMode>
-    </Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\app\src\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>559</SelStart2><SelEnd2>573</SelEnd2></Tab><ActiveTab>0</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\app\inc\main.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>5</YPos2><SelStart2>408</SelStart2><SelEnd2>408</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\drivers\src\gpio.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>15</YPos2><SelStart2>890</SelStart2><SelEnd2>890</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\drivers\inc\gpio.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>69</YPos2><SelStart2>2845</SelStart2><SelEnd2>2845</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\drivers\src\clock.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1</YPos2><SelStart2>288</SelStart2><SelEnd2>288</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\drivers\inc\clock.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>475</SelStart2><SelEnd2>475</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\drivers\src\delay.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>6</YPos2><SelStart2>567</SelStart2><SelEnd2>575</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\drivers\src\st7735.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>143</YPos2><SelStart2>4175</SelStart2><SelEnd2>4196</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\drivers\inc\st7735.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>14</YPos2><SelStart2>2114</SelStart2><SelEnd2>2119</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
-      <Top>
-        <Row0>
-          <Sizes>
-            <Toolbar-05326F48>
-              <key>iaridepm.enu1</key>
-            </Toolbar-05326F48>
-          </Sizes>
-        </Row0>
-        <Row1>
-          <Sizes/>
-        </Row1>
-      </Top>
-      <Left>
-        <Row0>
-          <Sizes>
-            <Wnd2>
-              <Rect>
-                <Top>-2</Top>
-                <Left>-2</Left>
-                <Bottom>503</Bottom>
-                <Right>272</Right>
-                <x>-2</x>
-                <y>-2</y>
-                <xscreen>200</xscreen>
-                <yscreen>200</yscreen>
-                <sizeHorzCX>147059</sizeHorzCX>
-                <sizeHorzCY>287770</sizeHorzCY>
-                <sizeVertCX>201471</sizeVertCX>
-                <sizeVertCY>726619</sizeVertCY>
-              </Rect>
-            </Wnd2>
-          </Sizes>
-        </Row0>
-      </Left>
-      <Right>
-        <Row0>
-          <Sizes/>
-        </Row0>
-      </Right>
-      <Bottom>
-        <Row0>
-          <Sizes>
-            <Wnd3>
-              <Rect>
-                <Top>-2</Top>
-                <Left>-2</Left>
-                <Bottom>147</Bottom>
-                <Right>1362</Right>
-                <x>-2</x>
-                <y>-2</y>
-                <xscreen>1364</xscreen>
-                <yscreen>149</yscreen>
-                <sizeHorzCX>1002941</sizeHorzCX>
-                <sizeHorzCY>214388</sizeHorzCY>
-                <sizeVertCX>147059</sizeVertCX>
-                <sizeVertCY>287770</sizeVertCY>
-              </Rect>
-            </Wnd3>
-          </Sizes>
-        </Row0>
-      </Bottom>
-      <Float>
-        <Sizes/>
-      </Float>
-    </Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-047425C8><key>iaridepm.enu1</key></Toolbar-047425C8></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>650</Bottom><Right>469</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>147059</sizeHorzCX><sizeHorzCY>287770</sizeHorzCY><sizeVertCX>346324</sizeVertCX><sizeVertCY>938129</sizeVertCY></Rect></Wnd0></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes/></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Workspace>
 

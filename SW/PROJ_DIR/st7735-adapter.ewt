@@ -2343,6 +2343,9 @@
     <file>
       <name>$PROJ_DIR$\..\drivers\src\gpio.c</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\..\drivers\src\st7735.c</name>
+    </file>
   </group>
 </project>
 

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V7.80.2.11947/W32 for ARM                11/Nov/2018  13:04:12
+# IAR ELF Linker V7.80.2.11947/W32 for ARM                11/Nov/2018  13:54:37
 # Copyright 2007-2016 IAR Systems AB.
 #
 #    Output file  =  
@@ -12,6 +12,7 @@
 #        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\delay.o
 #        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\gpio.o
 #        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\main.o
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\st7735.o
 #        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\startup_stm32f042x6.o
 #        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\system_stm32f0xx.o
 #        -o
