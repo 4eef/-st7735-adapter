@@ -24,9 +24,9 @@ pinMode_type   const pinsMode[] = {
 /*5 */  makepin(GPIOA,  2,  outPushPull,                0,  0),     //LCD_CS
 /*6 */  makepin(GPIOA,  3,  outPushPull,                0,  0),     //LCD_DC
 /*7 */  makepin(GPIOA,  4,  outPushPull,                0,  0),     //LCD_RES
-/*8 */  makepin(GPIOA,  5,  alternateFunctionPushPull,  1,  0),     //LCD_SCK
+/*8 */  makepin(GPIOA,  5,  alternateFunctionPushPull,  0,  0),     //LCD_SCK
 /*9 */  makepin(GPIOA,  6,  floatingInput,              0,  0),     //RES4
-/*10*/  makepin(GPIOA,  7,  alternateFunctionPushPull,  1,  0),     //LCD_SDA
+/*10*/  makepin(GPIOA,  7,  alternateFunctionPushPull,  0,  0),     //LCD_SDA
 /*11*/  makepin(GPIOB,  1,  floatingInput,              0,  0),     //RES5
 /*11*/  makepin(GPIOA,  11, floatingInput,              0,  0),     //RES6
 /*11*/  makepin(GPIOA,  12, floatingInput,              0,  0),     //RES7

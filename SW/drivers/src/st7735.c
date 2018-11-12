@@ -294,22 +294,23 @@ const uint8_t Rcmd3[] = {
 static void spiInit(void){
 	//Max speed - fPCLK/2
 	RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;		//Clock enable
-//	RCC->APB2RSTR |= RCC_APB2RSTR_SPI1RST;	//Reset module
-//	RCC->APB2RSTR &= ~RCC_APB2RSTR_SPI1RST;
+	RCC->APB2RSTR |= RCC_APB2RSTR_SPI1RST;	//Reset module
+	RCC->APB2RSTR &= ~RCC_APB2RSTR_SPI1RST;
 
     //LCD_SPI->CR1 |= (SPI_CR1_BR_0 | SPI_CR1_BR_1 | SPI_CR1_BR_2);
 	LCD_SPI->CR1 |= SPI_CR1_MSTR;				//Master configuration
+    LCD_SPI->CR2 |= SPI_CR2_SSOE;
 //	LCD_SPI->CR1 |= SPI_CR1_SSM;				//Software slave management enabled
 //	LCD_SPI->CR1 |= SPI_CR1_SSI;				//Internal slave select
 //	LCD_SPI->CR1 &= ~SPI_CR1_DFF;				//8-bit data frame format is selected for transmission/reception
-//    LCD_SPI->CR2 |= (SPI_CR2_DS_0 | SPI_CR2_DS_1 | SPI_CR2_DS_2);//8-bit
-//	LCD_SPI->CR1 &= ~SPI_CR1_LSBFIRST;			//MSB transmitted first
+    LCD_SPI->CR2 |= (SPI_CR2_DS_0 | SPI_CR2_DS_1 | SPI_CR2_DS_2);//8-bit
+	LCD_SPI->CR1 &= ~SPI_CR1_LSBFIRST;			//MSB transmitted first
 
 	LCD_SPI->CR1 |= SPI_CR1_SPE;				//SPI enable
 
-//	gppin_init(GPIOB, 3, alternateFunctionPushPull, pullDisable, 0, 6);	//SPI1_SCK
-//	gppin_init(GPIOB, 4, alternateFunctionPushPull, pullDisable, 0, 6);	//SPI1_MISO
-//	gppin_init(GPIOB, 5, alternateFunctionPushPull, pullDisable, 0, 6);	//SPI1_MOSI
+//	gppin_init(GPIOA, 5, alternateFunctionPushPull, 0, 0);	//SPI1_SCK
+//	gppin_init(GPIOA, 6, alternateFunctionPushPull, 0, 0);	//SPI1_MISO
+//	gppin_init(GPIOA, 7, alternateFunctionPushPull, 0, 0);	//SPI1_MOSI
 }
 
 /*!****************************************************************************
@@ -347,7 +348,7 @@ void initSpiDMA(void){
  */
 void spiSend(uint8_t data){
 	*((uint8_t*)&(LCD_SPI->DR)) = data;
-	while((LCD_SPI->SR & SPI_SR_TXE) != 0);
+//	while((LCD_SPI->SR & SPI_SR_TXE) != 0);
 	while((LCD_SPI->SR & SPI_SR_BSY) != 0);
 }
 
@@ -637,6 +638,7 @@ void initR(uint8_t options){
 	setRotation(3);
 
 	st7735_setAddressWindow(0, 0, width - 1, height - 1);
+    
 	initSpiDMA();
 }
 

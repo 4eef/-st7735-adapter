@@ -1,24 +1,24 @@
 ###############################################################################
 #
-# IAR ELF Linker V7.70.1.11437/W32 for ARM                12/Nov/2018  17:54:11
+# IAR ELF Linker V7.80.2.11947/W32 for ARM                12/Nov/2018  22:53:13
 # Copyright 2007-2016 IAR Systems AB.
 #
 #    Output file  =  
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Exe\st7735-adapter.out
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Exe\st7735-adapter.out
 #    Map file     =  
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\List\st7735-adapter.map
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\List\st7735-adapter.map
 #    Command line =  
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\clock.o
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\delay.o
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\gpio.o
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\main.o
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\st7735.o
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\startup_stm32f042x6.o
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\system_stm32f0xx.o
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\clock.o
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\delay.o
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\gpio.o
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\main.o
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\st7735.o
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\startup_stm32f042x6.o
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj\system_stm32f0xx.o
 #        --redirect _Printf=_PrintfFull --redirect _Scanf=_ScanfFull -o
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Exe\st7735-adapter.out
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Exe\st7735-adapter.out
 #        --map
-#        C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\List\st7735-adapter.map
+#        C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\List\st7735-adapter.map
 #        --config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
 #        7.5\arm\config\linker\ST\stm32f042x4.icf" --semihosting --entry
 #        __iar_program_start --vfe
@@ -48,67 +48,67 @@ initialize by copy { rw };
   .intvec            ro code  0x08000000   0xc0  startup_stm32f042x6.o [1]
                             - 0x080000c0   0xc0
 
-"P1":                                     0xbaa
-  .text              ro code  0x080000c0  0x48c  st7735.o [1]
-  .text              ro code  0x0800054c   0x32  I64Mul.o [4]
-  .text              ro code  0x0800057e   0xe0  I32DivModFast.o [4]
-  .text              ro code  0x0800065e    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000660    0x2  IntDivZer.o [4]
-  .text              ro code  0x08000662    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000664  0x220  gpio.o [1]
-  .rodata            const    0x08000884   0xa8  gpio.o [1]
-  .text              ro code  0x0800092c   0xa0  clock.o [1]
-  .text              ro code  0x080009cc   0x94  system_stm32f0xx.o [1]
-  .rodata            const    0x08000a60   0x48  st7735.o [1]
-  .text              ro code  0x08000aa8   0x3c  startup_stm32f042x6.o [1]
-  .rodata            const    0x08000ae4   0x30  st7735.o [1]
-  .text              ro code  0x08000b14   0x30  copy_init3.o [4]
-  .text              ro code  0x08000b44   0x28  data_init.o [4]
-  .iar.init_table    const    0x08000b6c   0x14  - Linker created -
-  .text              ro code  0x08000b80   0x1a  cmain.o [4]
-  .text              ro code  0x08000b9a    0x4  low_level_init.o [3]
-  .text              ro code  0x08000b9e   0x12  main.o [1]
-  .text              ro code  0x08000bb0    0x8  exit.o [3]
-  .text              ro code  0x08000bb8    0xa  cexit.o [4]
-  .text              ro code  0x08000bc2    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000bc4   0x14  exit.o [5]
-  .rodata            const    0x08000bd8   0x10  st7735.o [1]
-  .rodata            const    0x08000be8   0x10  st7735.o [1]
-  .rodata            const    0x08000bf8   0x10  st7735.o [1]
-  .rodata            const    0x08000c08   0x10  st7735.o [1]
-  .text              ro code  0x08000c18    0xc  cstartup_M.o [4]
-  Initializer bytes  const    0x08000c24    0xc  <for P2-1>
-  .text              ro code  0x08000c30    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c32    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c34    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c36    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c38    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c3a    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c3c    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c3e    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c40    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c42    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c44    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c46    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c48    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c4a    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c4c    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c4e    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c50    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c52    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c54    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c56    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c58    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c5a    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c5c    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c5e    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c60    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c62    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c64    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c66    0x2  startup_stm32f042x6.o [1]
-  .text              ro code  0x08000c68    0x2  startup_stm32f042x6.o [1]
-  .rodata            const    0x08000c6a    0x0  copy_init3.o [4]
-                            - 0x08000c6a  0xbaa
+"P1":                                     0xbee
+  .text              ro code  0x080000c0  0x4d0  st7735.o [1]
+  .text              ro code  0x08000590   0x32  I64Mul.o [4]
+  .text              ro code  0x080005c2   0xe0  I32DivModFast.o [4]
+  .text              ro code  0x080006a2    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x080006a4    0x2  IntDivZer.o [4]
+  .text              ro code  0x080006a6    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x080006a8  0x220  gpio.o [1]
+  .rodata            const    0x080008c8   0xa8  gpio.o [1]
+  .text              ro code  0x08000970   0xa0  clock.o [1]
+  .text              ro code  0x08000a10   0x94  system_stm32f0xx.o [1]
+  .rodata            const    0x08000aa4   0x48  st7735.o [1]
+  .text              ro code  0x08000aec   0x3c  startup_stm32f042x6.o [1]
+  .rodata            const    0x08000b28   0x30  st7735.o [1]
+  .text              ro code  0x08000b58   0x30  copy_init3.o [4]
+  .text              ro code  0x08000b88   0x28  data_init.o [4]
+  .iar.init_table    const    0x08000bb0   0x14  - Linker created -
+  .text              ro code  0x08000bc4   0x1a  cmain.o [4]
+  .text              ro code  0x08000bde    0x4  low_level_init.o [3]
+  .text              ro code  0x08000be2   0x12  main.o [1]
+  .text              ro code  0x08000bf4    0x8  exit.o [3]
+  .text              ro code  0x08000bfc    0xa  cexit.o [4]
+  .text              ro code  0x08000c06    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c08   0x14  exit.o [5]
+  .rodata            const    0x08000c1c   0x10  st7735.o [1]
+  .rodata            const    0x08000c2c   0x10  st7735.o [1]
+  .rodata            const    0x08000c3c   0x10  st7735.o [1]
+  .rodata            const    0x08000c4c   0x10  st7735.o [1]
+  .text              ro code  0x08000c5c    0xc  cstartup_M.o [4]
+  Initializer bytes  const    0x08000c68    0xc  <for P2-1>
+  .text              ro code  0x08000c74    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c76    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c78    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c7a    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c7c    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c7e    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c80    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c82    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c84    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c86    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c88    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c8a    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c8c    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c8e    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c90    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c92    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c94    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c96    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c98    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c9a    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c9c    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000c9e    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000ca0    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000ca2    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000ca4    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000ca6    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000ca8    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000caa    0x2  startup_stm32f042x6.o [1]
+  .text              ro code  0x08000cac    0x2  startup_stm32f042x6.o [1]
+  .rodata            const    0x08000cae    0x0  copy_init3.o [4]
+                            - 0x08000cae  0xbee
 
 "P2", part 1 of 2:                          0xc
   P2-1                        0x20000000    0xb  <Init block>
@@ -136,7 +136,7 @@ initialize by copy { rw };
           -------     ----
 Copy (__iar_copy_init3)
     1 source range, total size 0xc (109% of destination):
-          0x08000c24   0xc
+          0x08000c68   0xc
     1 destination range, total size 0xb:
           0x20000000   0xb
 
@@ -148,15 +148,15 @@ Copy (__iar_copy_init3)
 
     Module                 ro code  ro data  rw data
     ------                 -------  -------  -------
-C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj: [1]
+C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj: [1]
     clock.o                    160
     gpio.o                     544      172        4
     main.o                      18
-    st7735.o                 1 164      191        7
+    st7735.o                 1 232      191        7
     startup_stm32f042x6.o      316
     system_stm32f0xx.o         148
     ------------------------------------------------
-    Total:                   2 350      363       11
+    Total:                   2 418      363       11
 
 command line: [2]
     ------------------------------------------------
@@ -187,7 +187,7 @@ shb_l.a: [5]
 
     Linker created                       21    1 024
 ----------------------------------------------------
-    Grand Total:             2 794      384    1 035
+    Grand Total:             2 862      384    1 035
 
 
 *******************************************************************************
@@ -196,75 +196,75 @@ shb_l.a: [5]
 
 Entry                      Address   Size  Type      Object
 -----                      -------   ----  ----      ------
-.iar.init_table$$Base   0x08000b6c          --   Gb  - Linker created -
-.iar.init_table$$Limit  0x08000b80          --   Gb  - Linker created -
-?main                   0x08000b81         Code  Gb  cmain.o [4]
+.iar.init_table$$Base   0x08000bb0          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x08000bc4          --   Gb  - Linker created -
+?main                   0x08000bc5         Code  Gb  cmain.o [4]
 CSTACK$$Base            0x20000010          --   Gb  - Linker created -
 CSTACK$$Limit           0x20000410          --   Gb  - Linker created -
-Rcmd1                   0x08000a60   0x48  Data  Gb  st7735.o [1]
-Rcmd2green              0x08000bd8   0x10  Data  Gb  st7735.o [1]
-Rcmd2green144           0x08000bf8   0x10  Data  Gb  st7735.o [1]
-Rcmd2green160x80        0x08000c08   0x10  Data  Gb  st7735.o [1]
-Rcmd2red                0x08000be8   0x10  Data  Gb  st7735.o [1]
-Rcmd3                   0x08000ae4   0x30  Data  Gb  st7735.o [1]
-Region$$Table$$Base     0x08000b6c          --   Gb  - Linker created -
-Region$$Table$$Limit    0x08000b80          --   Gb  - Linker created -
-SystemInit              0x080009cd   0x68  Code  Gb  system_stm32f0xx.o [1]
+Rcmd1                   0x08000aa4   0x48  Data  Gb  st7735.o [1]
+Rcmd2green              0x08000c1c   0x10  Data  Gb  st7735.o [1]
+Rcmd2green144           0x08000c3c   0x10  Data  Gb  st7735.o [1]
+Rcmd2green160x80        0x08000c4c   0x10  Data  Gb  st7735.o [1]
+Rcmd2red                0x08000c2c   0x10  Data  Gb  st7735.o [1]
+Rcmd3                   0x08000b28   0x30  Data  Gb  st7735.o [1]
+Region$$Table$$Base     0x08000bb0          --   Gb  - Linker created -
+Region$$Table$$Limit    0x08000bc4          --   Gb  - Linker created -
+SystemInit              0x08000a11   0x68  Code  Gb  system_stm32f0xx.o [1]
 __ICFEDIT_region_RAM_end__ {Abs}
                         0x200017ff         Data  Gb  command line/config [2]
 __ICFEDIT_region_RAM_start__ {Abs}
                         0x20000000         Data  Gb  command line/config [2]
-__aeabi_idiv            0x080005ab         Code  Gb  I32DivModFast.o [4]
-__aeabi_idiv0           0x08000661         Code  Gb  IntDivZer.o [4]
-__aeabi_idivmod         0x080005ab         Code  Gb  I32DivModFast.o [4]
-__aeabi_lmul            0x0800054d         Code  Gb  I64Mul.o [4]
-__aeabi_uidiv           0x080005b1         Code  Gb  I32DivModFast.o [4]
-__aeabi_uidivmod        0x080005b1         Code  Gb  I32DivModFast.o [4]
-__cmain                 0x08000b81         Code  Gb  cmain.o [4]
-__exit                  0x08000bc5   0x14  Code  Gb  exit.o [5]
-__iar_copy_init3        0x08000b15   0x30  Code  Gb  copy_init3.o [4]
-__iar_data_init3        0x08000b45   0x28  Code  Gb  data_init.o [4]
-__iar_program_start     0x08000c19         Code  Gb  cstartup_M.o [4]
-__low_level_init        0x08000b9b    0x4  Code  Gb  low_level_init.o [3]
+__aeabi_idiv            0x080005ef         Code  Gb  I32DivModFast.o [4]
+__aeabi_idiv0           0x080006a5         Code  Gb  IntDivZer.o [4]
+__aeabi_idivmod         0x080005ef         Code  Gb  I32DivModFast.o [4]
+__aeabi_lmul            0x08000591         Code  Gb  I64Mul.o [4]
+__aeabi_uidiv           0x080005f5         Code  Gb  I32DivModFast.o [4]
+__aeabi_uidivmod        0x080005f5         Code  Gb  I32DivModFast.o [4]
+__cmain                 0x08000bc5         Code  Gb  cmain.o [4]
+__exit                  0x08000c09   0x14  Code  Gb  exit.o [5]
+__iar_copy_init3        0x08000b59   0x30  Code  Gb  copy_init3.o [4]
+__iar_data_init3        0x08000b89   0x28  Code  Gb  data_init.o [4]
+__iar_program_start     0x08000c5d         Code  Gb  cstartup_M.o [4]
+__low_level_init        0x08000bdf    0x4  Code  Gb  low_level_init.o [3]
 __vector_table          0x08000000         Data  Gb  startup_stm32f042x6.o [1]
-_call_main              0x08000b8d         Code  Gb  cmain.o [4]
-_exit                   0x08000bb9         Code  Gb  cexit.o [4]
-_main                   0x08000b97         Code  Gb  cmain.o [4]
+_call_main              0x08000bd1         Code  Gb  cmain.o [4]
+_exit                   0x08000bfd         Code  Gb  cexit.o [4]
+_main                   0x08000bdb         Code  Gb  cmain.o [4]
 colstart                0x20000004    0x1  Data  Lc  st7735.o [1]
-commandList             0x080001c5   0x5c  Code  Gb  st7735.o [1]
-commonInit              0x08000221   0x48  Code  Gb  st7735.o [1]
-exit                    0x08000bb1    0x8  Code  Gb  exit.o [3]
-gppin_init              0x0800069f  0x1cc  Code  Gb  gpio.o [1]
+commandList             0x080001fd   0x5c  Code  Gb  st7735.o [1]
+commonInit              0x08000259   0x48  Code  Gb  st7735.o [1]
+exit                    0x08000bf5    0x8  Code  Gb  exit.o [3]
+gppin_init              0x080006e3  0x1cc  Code  Gb  gpio.o [1]
 height                  0x20000008    0x1  Data  Lc  st7735.o [1]
-initClocks              0x0800092d   0xa0  Code  Gb  clock.o [1]
-initGpios               0x08000665   0x3a  Code  Gb  gpio.o [1]
-initR                   0x08000461   0xc0  Code  Gb  st7735.o [1]
-initSpiDMA              0x080000e9    0x2  Code  Gb  st7735.o [1]
-lcdDelay                0x08000133   0x2c  Code  Gb  st7735.o [1]
-main                    0x08000b9f   0x12  Code  Gb  main.o [1]
+initClocks              0x08000971   0xa0  Code  Gb  clock.o [1]
+initGpios               0x080006a9   0x3a  Code  Gb  gpio.o [1]
+initR                   0x080004a5   0xc0  Code  Gb  st7735.o [1]
+initSpiDMA              0x08000129    0x2  Code  Gb  st7735.o [1]
+lcdDelay                0x0800016b   0x2c  Code  Gb  st7735.o [1]
+main                    0x08000be3   0x12  Code  Gb  main.o [1]
 pinNum                  0x20000000    0x4  Data  Gb  gpio.o [1]
-pinsMode                0x08000884   0xa8  Data  Gb  gpio.o [1]
+pinsMode                0x080008c8   0xa8  Data  Gb  gpio.o [1]
 rowstart                0x20000005    0x1  Data  Lc  st7735.o [1]
-setRotation             0x08000281  0x1ca  Code  Gb  st7735.o [1]
-spiInit                 0x080000c1   0x28  Code  Lc  st7735.o [1]
-spiSend                 0x080000eb   0x18  Code  Gb  st7735.o [1]
-st7735_lcdCmd           0x08000103   0x18  Code  Gb  st7735.o [1]
-st7735_lcdDat           0x0800011b   0x18  Code  Gb  st7735.o [1]
+setRotation             0x080002c5  0x1ca  Code  Gb  st7735.o [1]
+spiInit                 0x080000c1   0x68  Code  Lc  st7735.o [1]
+spiSend                 0x0800012b   0x10  Code  Gb  st7735.o [1]
+st7735_lcdCmd           0x0800013b   0x18  Code  Gb  st7735.o [1]
+st7735_lcdDat           0x08000153   0x18  Code  Gb  st7735.o [1]
 st7735_setAddressWindow
-                        0x0800015f   0x66  Code  Gb  st7735.o [1]
+                        0x08000197   0x66  Code  Gb  st7735.o [1]
 tabcolor                0x2000000a    0x1  Data  Lc  st7735.o [1]
 width                   0x20000009    0x1  Data  Lc  st7735.o [1]
 xstart                  0x20000006    0x1  Data  Lc  st7735.o [1]
 ystart                  0x20000007    0x1  Data  Lc  st7735.o [1]
 
 
-[1] = C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj
+[1] = C:\Users\4eef\Projects\st7735-adapter\SW\PROJ_DIR\Debug\Obj
 [2] = command line
 [3] = dl6M_tln.a
 [4] = rt6M_tl.a
 [5] = shb_l.a
 
-  2 794 bytes of readonly  code memory
+  2 862 bytes of readonly  code memory
     384 bytes of readonly  data memory
   1 035 bytes of readwrite data memory
 
