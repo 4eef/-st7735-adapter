@@ -98,8 +98,8 @@ typedef enum{
 /*9 */  GP_RES4,
 /*10*/  GP_LCD_SDA,
 /*11*/  GP_RES5,
-/*11*/  GP_RES6,
-/*11*/  GP_RES7,
+/*12*/  GP_RES6,
+/*13*/  GP_RES7,
 ///*14*/  GP_SWDIO,
 ///*15*/  GP_SWCLK,
 GP_NOT_USED

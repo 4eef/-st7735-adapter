@@ -91,9 +91,9 @@ enum lcdDescribed{
  * MEMORY
  */
 uint16_t videoBff[ST7735_W * ST7735_H];
-uint8_t colstart, rowstart, xstart, ystart; // some displays need this changed
-uint8_t height, width;
-uint8_t tabcolor;
+static uint8_t colstart, rowstart, xstart, ystart; // some displays need this changed
+static uint8_t height, width;
+static uint8_t tabcolor;
 
 /*!
  * Rather than a bazillion writecommand() and writedata() calls, screen
@@ -293,45 +293,45 @@ const uint8_t Rcmd3[] = {
  */
 static void spiInit(void){
 	//Max speed - fPCLK/2
-	RCC->APB1ENR |= RCC_APB2ENR_SPI1EN;		//Clock enable
-	RCC->APB1RSTR |= RCC_APB2RSTR_SPI1RST;	//Reset module
-	RCC->APB1RSTR &= ~RCC_APB2RSTR_SPI1RST;
+	RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;		//Clock enable
+//	RCC->APB2RSTR |= RCC_APB2RSTR_SPI1RST;	//Reset module
+//	RCC->APB2RSTR &= ~RCC_APB2RSTR_SPI1RST;
 
-	//LCD_SPI->CR1 |= SPI_CR1_BR_1;
+    //LCD_SPI->CR1 |= (SPI_CR1_BR_0 | SPI_CR1_BR_1 | SPI_CR1_BR_2);
 	LCD_SPI->CR1 |= SPI_CR1_MSTR;				//Master configuration
-	LCD_SPI->CR1 |= SPI_CR1_SSM;				//Software slave management enabled
-	LCD_SPI->CR1 |= SPI_CR1_SSI;				//Internal slave select
-	//LCD_SPI->CR1 &= ~SPI_CR1_DFF;				//8-bit data frame format is selected for transmission/reception
-    LCD_SPI->CR2 |= (SPI_CR2_DS_0 | SPI_CR2_DS_1 | SPI_CR2_DS_2); //8-bit
-	LCD_SPI->CR1 &= ~SPI_CR1_LSBFIRST;			//MSB transmitted first
+//	LCD_SPI->CR1 |= SPI_CR1_SSM;				//Software slave management enabled
+//	LCD_SPI->CR1 |= SPI_CR1_SSI;				//Internal slave select
+//	LCD_SPI->CR1 &= ~SPI_CR1_DFF;				//8-bit data frame format is selected for transmission/reception
+//    LCD_SPI->CR2 |= (SPI_CR2_DS_0 | SPI_CR2_DS_1 | SPI_CR2_DS_2);//8-bit
+//	LCD_SPI->CR1 &= ~SPI_CR1_LSBFIRST;			//MSB transmitted first
 
 	LCD_SPI->CR1 |= SPI_CR1_SPE;				//SPI enable
 
 //	gppin_init(GPIOB, 3, alternateFunctionPushPull, pullDisable, 0, 6);	//SPI1_SCK
-	//gppin_init(GPIOB, 4, alternateFunctionPushPull, pullDisable, 0, 6);	//SPI1_MISO
+//	gppin_init(GPIOB, 4, alternateFunctionPushPull, pullDisable, 0, 6);	//SPI1_MISO
 //	gppin_init(GPIOB, 5, alternateFunctionPushPull, pullDisable, 0, 6);	//SPI1_MOSI
 }
 
 /*!****************************************************************************
  *
  */
-//void initSpiDMA(void){
-//	/************************************************
-//	 * DMA
-//	 */
+void initSpiDMA(void){
+	/************************************************
+	 * DMA
+	 */
 //	uint32_t dmaChannelTx = 0;
-////	DMA_Stream_TypeDef *pDmaStreamTx = DMA1_Stream7;
+//	DMA_Stream_TypeDef *pDmaStreamTx = DMA1_Stream7;
 //
-//	RCC->AHBENR |= RCC_AHBENR_DMA1EN;
+//	RCC->AHB1ENR |= RCC_AHB1ENR_DMA1EN;
 //	pDmaStreamTx->CR	= 0;
 //	pDmaStreamTx->CR	|= (uint32_t)((dmaChannelTx & 0x03) << 25);		//Channel selection
-//	pDmaStreamTx->CCR	|= DMA_CCR_PL_1;								//Priority level High
-//	pDmaStreamTx->CCR	|= DMA_CCR_MSIZE_0;							//Memory data size half-word (16-bit)
-//	pDmaStreamTx->CCR	|= DMA_CCR_PSIZE_0;							//Memory data size half-word (16-bit)
-//	pDmaStreamTx->CCR	|= DMA_CCR_MINC;								//Memory increment mode enabled
-//	pDmaStreamTx->CCR	&= ~DMA_CCR_PINC;								//Peripheral increment mode disabled
-//	pDmaStreamTx->CCR	|= DMA_CCR_CIRC;								//Circular mode enable
-//	pDmaStreamTx->CCR	|= DMA_CCR_DIR;								//Direction Memory-to-peripheral
+//	pDmaStreamTx->CR	|= DMA_SxCR_PL_1;								//Priority level High
+//	pDmaStreamTx->CR	|= DMA_SxCR_MSIZE_0;							//Memory data size half-word (16-bit)
+//	pDmaStreamTx->CR	|= DMA_SxCR_PSIZE_0;							//Memory data size half-word (16-bit)
+//	pDmaStreamTx->CR	|= DMA_SxCR_MINC;								//Memory increment mode enabled
+//	pDmaStreamTx->CR	&= ~DMA_SxCR_PINC;								//Peripheral increment mode disabled
+//	pDmaStreamTx->CR	|= DMA_SxCR_CIRC;								//Circular mode enable
+//	pDmaStreamTx->CR	|= DMA_SxCR_DIR_0;								//Direction Memory-to-peripheral
 //	pDmaStreamTx->NDTR	 = sizeof(videoBff) / 2;						//Number of data
 //	pDmaStreamTx->PAR	 = (uint32_t)&LCD_SPI->DR;						//Peripheral address
 //	pDmaStreamTx->M0AR	 = (uint32_t)&videoBff[0];						//Memory address
@@ -340,13 +340,13 @@ static void spiInit(void){
 //	LCD_SPI->CR1 |= SPI_CR1_DFF;				//16-bit data frame format is selected for transmission/reception
 //	LCD_SPI->CR2 |= SPI_CR2_TXDMAEN;
 //	DMA1_Stream7->CR |= DMA_SxCR_EN;
-//}
+}
 
 /*!****************************************************************************
  * @brief Send data from SPI
  */
 void spiSend(uint8_t data){
-	LCD_SPI->DR = data;
+	*((uint8_t*)&(LCD_SPI->DR)) = data;
 	while((LCD_SPI->SR & SPI_SR_TXE) != 0);
 	while((LCD_SPI->SR & SPI_SR_BSY) != 0);
 }
@@ -464,7 +464,7 @@ void commandList(const uint8_t *addr){
 /*!****************************************************************************
  * @brief Initialization code common to both 'B' and 'R' type displays
  */
-void commonInit(const uint8_t *cmdList) {
+void commonInit(void) {
 	spiInit();
 
 	gppin_reset(GP_LCD_CS);
@@ -475,10 +475,6 @@ void commonInit(const uint8_t *cmdList) {
 	lcdDelay(10);
 	gppin_set(GP_LCD_RST);
 	lcdDelay(10);
-
-	if(cmdList){
-		commandList(cmdList);
-	}
 }
 
 /*!****************************************************************************
@@ -592,7 +588,8 @@ void invertDisplay(uint8_t i){
  * @brief Initialization for ST7735B screens
  */
 void initB(void){
-	commonInit(Bcmd);
+	commonInit();
+    commandList(Rcmd1);
 	setRotation(0);
 }
 
@@ -600,14 +597,14 @@ void initB(void){
  * @brief Initialization for ST7735R screens (green or red tabs)
  */
 void initR(uint8_t options){
-	commonInit(Rcmd1);
+	commonInit();
+    commandList(Rcmd1);
 
 	if(options == INITR_GREENTAB){
 		commandList(Rcmd2green);
 		colstart = 2;
 		rowstart = 1;
 	}
-
 	else if(options == INITR_144GREENTAB){
 		height = ST7735_TFTHEIGHT_128;
 		width = ST7735_TFTWIDTH_128;
@@ -615,7 +612,6 @@ void initR(uint8_t options){
 		colstart = 2;
 		rowstart = 3;
 	}
-
 	else if(options == INITR_MINI160x80){
 		height = ST7735_TFTHEIGHT_160;
 		width = ST7735_TFTWIDTH_80;
@@ -623,7 +619,6 @@ void initR(uint8_t options){
 		colstart = 24;
 		rowstart = 0;
 	}
-
 	else{
 		// colstart, rowstart left at default '0' values
 		commandList(Rcmd2red);
@@ -641,8 +636,8 @@ void initR(uint8_t options){
 
 	setRotation(3);
 
-	st7735_setAddressWindow(0, 0, 159, 127);
-	//initSpiDMA();
+	st7735_setAddressWindow(0, 0, width - 1, height - 1);
+	initSpiDMA();
 }
 
 /******************************** END OF FILE ********************************/

@@ -21,7 +21,7 @@
 void main(void){
     initClocks();
     initGpios();
-//    initB();
+    initR(INITR_MINI160x80);
     
     while(1){
     }

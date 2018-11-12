@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OCLastSavedByProductVersion</name>
-          <state>7.70.1.11471</state>
+          <state>7.80.2.11970</state>
         </option>
         <option>
           <name>UseFlashLoader</name>
@@ -1402,7 +1402,7 @@
       <name>XDS100_ID</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>5</version>
+        <version>6</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -1555,6 +1555,14 @@
           <name>CCXds100ProbeList</name>
           <version>0</version>
           <state>2</state>
+        </option>
+        <option>
+          <name>CCXds100SWOPortRadio</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>CCXds100SWOPort</name>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -3033,7 +3041,7 @@
       <name>XDS100_ID</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>5</version>
+        <version>6</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>0</debug>
         <option>
@@ -3186,6 +3194,14 @@
           <name>CCXds100ProbeList</name>
           <version>0</version>
           <state>2</state>
+        </option>
+        <option>
+          <name>CCXds100SWOPortRadio</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>CCXds100SWOPort</name>
+          <state>1</state>
         </option>
       </data>
     </settings>
