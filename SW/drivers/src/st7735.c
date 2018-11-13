@@ -320,10 +320,27 @@ void initSpiDMA(void){
 	/************************************************
 	 * DMA
 	 */
-//	uint32_t dmaChannelTx = 0;
+    RCC->AHBENR     |= RCC_AHBENR_DMA1EN;
+    gppin_set(GP_LCD_DC);
+    LCD_SPI->CR2    |= SPI_CR2_TXDMAEN;
+    LCD_SPI->CR2    |= (SPI_CR2_DS_0 | SPI_CR2_DS_1 | SPI_CR2_DS_2 | SPI_CR2_DS_3);//16-bit
+    LCD_DMA->CPAR   = (uint32_t)(&(SPI1->DR));
+    LCD_DMA->CMAR   = (uint32_t)&videoBff[0];
+    LCD_DMA->CNDTR  = sizeof(videoBff) / 2;
+    LCD_DMA->CCR    |= DMA_CCR_MSIZE_0;//16-bit
+    LCD_DMA->CCR    |= DMA_CCR_PSIZE_0;
+    LCD_DMA->CCR    |= DMA_CCR_MINC;
+    LCD_DMA->CCR    &= ~DMA_CCR_PINC;
+    LCD_DMA->CCR    |= DMA_CCR_CIRC;//Circular
+    LCD_DMA->CCR    |= DMA_CCR_DIR;//Mem-to-Periph
+    LCD_DMA->CCR    &= ~DMA_CCR_TEIE;
+    LCD_DMA->CCR    &= ~DMA_CCR_TCIE;
+    
+    LCD_DMA->CCR    |= DMA_CCR_EN;
+    
+//	uint32_t dmaChannelTx = 3;
 //	DMA_Stream_TypeDef *pDmaStreamTx = DMA1_Stream7;
 //
-//	RCC->AHB1ENR |= RCC_AHB1ENR_DMA1EN;
 //	pDmaStreamTx->CR	= 0;
 //	pDmaStreamTx->CR	|= (uint32_t)((dmaChannelTx & 0x03) << 25);		//Channel selection
 //	pDmaStreamTx->CR	|= DMA_SxCR_PL_1;								//Priority level High

@@ -21,8 +21,8 @@
 #define ST7735_W			80
 #define ST7735_H			160
 #define LCD_SPI				SPI1
-#define LCD_DMA_CHANNEL		3
-#define LCD_DMA_STREAM		DMA1_Stream7
+#define LCD_DMA             DMA1_Channel3
+//#define LCD_DMA_STREAM		DMA1_Stream7
 
 /*!****************************************************************************
  * Enumeration
