@@ -18,7 +18,7 @@
 /*!****************************************************************************
  * Define
  */
-#define ST7735_W			80
+#define ST7735_W			8
 #define ST7735_H			160
 #define LCD_SPI				SPI1
 #define LCD_DMA             DMA1_Channel3

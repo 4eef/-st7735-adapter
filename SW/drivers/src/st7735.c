@@ -326,7 +326,7 @@ void initSpiDMA(void){
     LCD_SPI->CR2    |= (SPI_CR2_DS_0 | SPI_CR2_DS_1 | SPI_CR2_DS_2 | SPI_CR2_DS_3);//16-bit
     LCD_DMA->CPAR   = (uint32_t)(&(SPI1->DR));
     LCD_DMA->CMAR   = (uint32_t)&videoBff[0];
-    LCD_DMA->CNDTR  = sizeof(videoBff) / 2;
+    LCD_DMA->CNDTR  = ST7735_W * ST7735_H;//sizeof(videoBff) / 2;
     LCD_DMA->CCR    |= DMA_CCR_MSIZE_0;//16-bit
     LCD_DMA->CCR    |= DMA_CCR_PSIZE_0;
     LCD_DMA->CCR    |= DMA_CCR_MINC;
@@ -634,8 +634,8 @@ void initR(uint8_t options){
 		height = ST7735_TFTHEIGHT_160;
 		width = ST7735_TFTWIDTH_80;
 		commandList(Rcmd2green160x80);
-		colstart = 24;
-		rowstart = 0;
+		colstart = 26;
+		rowstart = 1;
 	}
 	else{
 		// colstart, rowstart left at default '0' values
@@ -655,6 +655,12 @@ void initR(uint8_t options){
 	setRotation(3);
 
 	st7735_setAddressWindow(0, 0, width - 1, height - 1);
+    
+    for(uint16_t i = 0; i < (ST7735_W * ST7735_H); i++){
+        videoBff[i] = (uint16_t)~pink;
+    }
+    
+//    invertDisplay(1);
     
 	initSpiDMA();
 }
