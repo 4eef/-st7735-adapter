@@ -212,7 +212,7 @@ const uint8_t Rcmd1[] = {
 	ST7735_VMCTR1, 1, 0,	// 12: Power control
 	0x0E,
 
-	ST7735_INVOFF, 0, 0,	// 13: Don't invert display
+	ST7735_INVON, 0, 0,	// 13: Don't invert display
 
 	ST7735_MADCTL, 1, 0,	// 14: Memory access control (directions)
 	0xC8,					//	   row addr/col addr, bottom to top refresh
@@ -337,27 +337,6 @@ void initSpiDMA(void){
     LCD_DMA->CCR    &= ~DMA_CCR_TCIE;
     
     LCD_DMA->CCR    |= DMA_CCR_EN;
-    
-//	uint32_t dmaChannelTx = 3;
-//	DMA_Stream_TypeDef *pDmaStreamTx = DMA1_Stream7;
-//
-//	pDmaStreamTx->CR	= 0;
-//	pDmaStreamTx->CR	|= (uint32_t)((dmaChannelTx & 0x03) << 25);		//Channel selection
-//	pDmaStreamTx->CR	|= DMA_SxCR_PL_1;								//Priority level High
-//	pDmaStreamTx->CR	|= DMA_SxCR_MSIZE_0;							//Memory data size half-word (16-bit)
-//	pDmaStreamTx->CR	|= DMA_SxCR_PSIZE_0;							//Memory data size half-word (16-bit)
-//	pDmaStreamTx->CR	|= DMA_SxCR_MINC;								//Memory increment mode enabled
-//	pDmaStreamTx->CR	&= ~DMA_SxCR_PINC;								//Peripheral increment mode disabled
-//	pDmaStreamTx->CR	|= DMA_SxCR_CIRC;								//Circular mode enable
-//	pDmaStreamTx->CR	|= DMA_SxCR_DIR_0;								//Direction Memory-to-peripheral
-//	pDmaStreamTx->NDTR	 = sizeof(videoBff) / 2;						//Number of data
-//	pDmaStreamTx->PAR	 = (uint32_t)&LCD_SPI->DR;						//Peripheral address
-//	pDmaStreamTx->M0AR	 = (uint32_t)&videoBff[0];						//Memory address
-//
-//	gppin_set(GP_LCD_DC);
-//	LCD_SPI->CR1 |= SPI_CR1_DFF;				//16-bit data frame format is selected for transmission/reception
-//	LCD_SPI->CR2 |= SPI_CR2_TXDMAEN;
-//	DMA1_Stream7->CR |= DMA_SxCR_EN;
 }
 
 /*!****************************************************************************
@@ -570,7 +549,8 @@ void setRotation(uint8_t m){
 
 		case 3:
 			if ((tabcolor == INITR_BLACKTAB) || (tabcolor == INITR_MINI160x80)) {
-				st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_RGB);
+//				st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_RGB);
+                st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_BGR);
 			} else {
 				st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_BGR);
 			}
@@ -657,10 +637,8 @@ void initR(uint8_t options){
 	st7735_setAddressWindow(0, 0, width - 1, height - 1);
     
     for(uint16_t i = 0; i < (ST7735_W * ST7735_H); i++){
-        videoBff[i] = (uint16_t)~pink;
+        videoBff[i] = i;
     }
-    
-//    invertDisplay(1);
     
 	initSpiDMA();
 }
