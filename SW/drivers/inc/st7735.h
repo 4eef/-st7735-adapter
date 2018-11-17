@@ -82,8 +82,8 @@ static inline void st7735_setPixel(uint16_t x, uint16_t y, lcd_color_type color)
  * Function declaration
  */
 void st7735_init(void);
-void initB(void);
-void initR(uint8_t options);
+void st7735_sleepOn(void);
+void st7735_sleepOff(void);
 
 #endif //st7735_H
 /******************************** END OF FILE ********************************/

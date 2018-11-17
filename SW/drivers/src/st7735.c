@@ -11,7 +11,9 @@
  * Include
  */
 #include "stm32f0xx.h"
+#include "stdbool.h"
 #include "gpio.h"
+#include "delay.h"
 #include "st7735.h"
 
 /*!****************************************************************************
@@ -25,6 +27,8 @@
 #define ST7735_TFTHEIGHT_128 128
 // for 1.8" and mini display
 #define ST7735_TFTHEIGHT_160  160
+
+//static uint8_t cmd, rxBff[3], num;
 
 /*!****************************************************************************
  * Enumeration
@@ -95,13 +99,17 @@ static uint8_t colstart, rowstart, xstart, ystart; // some displays need this ch
 static uint8_t height, width;
 static uint8_t tabcolor;
 
-/*!
- * Rather than a bazillion writecommand() and writedata() calls, screen
- * initialization commands and arguments are organized in these tables
- * stored in PROGMEM.  The table may look bulky, but that's mostly the
- * formatting -- storage-wise this is hundreds of bytes more compact
- * than the equivalent code.  Companion function follows.
- */
+void st7735_lcdCmd(uint8_t cmd);
+void st7735_lcdDat(uint8_t data);
+void st7735_lcdDat16(uint16_t data);
+void st7735_setWndAddr(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
+void st7735_exeCmdList(const uint8_t *addr);
+void st7735_commonInit(void);
+void st7735_setRotation(uint8_t m);
+void st7735_invertDisplay(bool set);
+void st7735_initB(void);
+void st7735_initR(uint8_t options);
+
 /// Initialization commands for 7735B screens
 const uint8_t Bcmd[] = {
 	18,		// 18 commands in list
@@ -212,7 +220,7 @@ const uint8_t Rcmd1[] = {
 	ST7735_VMCTR1, 1, 0,	// 12: Power control
 	0x0E,
 
-	ST7735_INVON, 0, 0,	// 13: Don't invert display
+	ST7735_INVOFF, 0, 0,	// 13: Don't invert display
 
 	ST7735_MADCTL, 1, 0,	// 14: Memory access control (directions)
 	0xC8,					//	   row addr/col addr, bottom to top refresh
@@ -288,39 +296,29 @@ const uint8_t Rcmd3[] = {
 	ST7735_DISPON, 0, 100,	// 4: Main screen turn on
 };
 
-/*!****************************************************************************
- * @brief SPI initialization
- */
-static void spiInit(void){
+
+void spiInit(void){
 	//Max speed - fPCLK/2
 	RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;		//Clock enable
 	RCC->APB2RSTR |= RCC_APB2RSTR_SPI1RST;	//Reset module
 	RCC->APB2RSTR &= ~RCC_APB2RSTR_SPI1RST;
 
-    //LCD_SPI->CR1 |= (SPI_CR1_BR_0 | SPI_CR1_BR_1 | SPI_CR1_BR_2);
-	LCD_SPI->CR1 |= SPI_CR1_MSTR;				//Master configuration
+	LCD_SPI->CR1 |= SPI_CR1_MSTR;
+	LCD_SPI->CR1 &= ~SPI_CR1_LSBFIRST;
+    LCD_SPI->CR1 |= SPI_CR1_BIDIMODE;
+    LCD_SPI->CR1 |= SPI_CR1_BIDIOE;
     LCD_SPI->CR2 |= SPI_CR2_SSOE;
-//	LCD_SPI->CR1 |= SPI_CR1_SSM;				//Software slave management enabled
-//	LCD_SPI->CR1 |= SPI_CR1_SSI;				//Internal slave select
-//	LCD_SPI->CR1 &= ~SPI_CR1_DFF;				//8-bit data frame format is selected for transmission/reception
-    LCD_SPI->CR2 |= (SPI_CR2_DS_0 | SPI_CR2_DS_1 | SPI_CR2_DS_2);//8-bit
-	LCD_SPI->CR1 &= ~SPI_CR1_LSBFIRST;			//MSB transmitted first
+    LCD_SPI->CR2 &= ~SPI_CR2_DS_3;              //8-bit
 
 	LCD_SPI->CR1 |= SPI_CR1_SPE;				//SPI enable
 
 //	gppin_init(GPIOA, 5, alternateFunctionPushPull, 0, 0);	//SPI1_SCK
-//	gppin_init(GPIOA, 6, alternateFunctionPushPull, 0, 0);	//SPI1_MISO
 //	gppin_init(GPIOA, 7, alternateFunctionPushPull, 0, 0);	//SPI1_MOSI
 }
 
-/*!****************************************************************************
- *
- */
 void initSpiDMA(void){
-	/************************************************
-	 * DMA
-	 */
     RCC->AHBENR     |= RCC_AHBENR_DMA1EN;
+    
     gppin_set(GP_LCD_DC);
     LCD_SPI->CR2    |= SPI_CR2_TXDMAEN;
     LCD_SPI->CR2    |= (SPI_CR2_DS_0 | SPI_CR2_DS_1 | SPI_CR2_DS_2 | SPI_CR2_DS_3);//16-bit
@@ -339,40 +337,33 @@ void initSpiDMA(void){
     LCD_DMA->CCR    |= DMA_CCR_EN;
 }
 
-/*!****************************************************************************
- * @brief Send data from SPI
- */
+void deInitSpiDMA(void){
+    LCD_DMA->CCR    &= ~DMA_CCR_CIRC;
+    DMA1->IFCR      |= (DMA_IFCR_CGIF3 | DMA_IFCR_CTCIF3 | DMA_IFCR_CHTIF3 | DMA_IFCR_CTEIF3);
+    while((DMA1->ISR & DMA_ISR_TCIF3) == 0);
+    LCD_DMA->CCR    &= ~DMA_CCR_EN;
+    LCD_SPI->CR2    &= ~SPI_CR2_TXDMAEN;
+    LCD_SPI->CR2    &= ~SPI_CR2_DS_3;//8-bit
+}
+
 void spiSend(uint8_t data){
 	*((uint8_t*)&(LCD_SPI->DR)) = data;
-//	while((LCD_SPI->SR & SPI_SR_TXE) != 0);
 	while((LCD_SPI->SR & SPI_SR_BSY) != 0);
 }
 
-///*!****************************************************************************
-// * @brief Send data from SPI
-// */
-//void st7735_bffSpiWrite(const void *bff, uint16_t len){
-//	DMA_Stream_TypeDef *pDmaStreamTx = LCD_DMA_STREAM;
-//	pDmaStreamTx->CR &= ~DMA_SxCR_EN;
-//	pDmaStreamTx->CR &= ~DMA_SxCR_CIRC;		//Circular mode disable
-//	pDmaStreamTx->M0AR = (uint32_t) &bff;		//Memory address
-//	pDmaStreamTx->NDTR = len;					//Number of data
-//	pDmaStreamTx->CR |= DMA_SxCR_EN;
-//	while((LCD_SPI->SR & SPI_SR_BSY) != 0)
-//		;
-//}
-//
-///*!****************************************************************************
-// * @brief Circular Send data from SPI
-// */
-//void st7735_bffCircSpiWrite(const void *bff, uint16_t len){
-//	DMA_Stream_TypeDef *pDmaStreamTx = LCD_DMA_STREAM;
-//	pDmaStreamTx->CR &= ~DMA_SxCR_EN;
-//	pDmaStreamTx->CR |= DMA_SxCR_CIRC;		//Circular mode disable
-//	pDmaStreamTx->M0AR = (uint32_t) &bff;		//Memory address
-//	pDmaStreamTx->NDTR = len;					//Number of data
-//	pDmaStreamTx->CR |= DMA_SxCR_EN;
-//}
+void spiRead(uint8_t addr, uint8_t *pRxBff, uint8_t num){
+    uint8_t i;
+    *((uint8_t*)&(LCD_SPI->DR)) = addr;
+	while((LCD_SPI->SR & SPI_SR_BSY) != 0);
+    LCD_SPI->CR1 &= ~SPI_CR1_BIDIOE;
+    for(i = num; i > 0; i++){
+        while((LCD_SPI->SR & SPI_SR_RXNE) == 0);
+        *pRxBff = LCD_SPI->DR;
+        pRxBff++;
+    }
+    LCD_SPI->CR1 |= SPI_CR1_BIDIOE;
+    __NOP();
+}
 
 /*!****************************************************************************
  * @brief Send command
@@ -400,23 +391,9 @@ void st7735_lcdDat16(uint16_t data){
 }
 
 /*!****************************************************************************
- * @brief
- */
-void lcdDelay(uint64_t delay){
-	delay = delay * 10000;
-	for(uint64_t i = 0; i < delay; i++){
-		__NOP();
-		__NOP();
-		__NOP();
-		__NOP();
-		__NOP();
-	}
-}
-
-/*!****************************************************************************
  * @brief Set address window on Graphic RAM
  */
-void st7735_setAddressWindow(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1){
+void st7735_setWndAddr(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1){
 	st7735_lcdCmd(ST7735_CASET);	// column addr set
 	st7735_lcdDat(0x00);
 	st7735_lcdDat(x0 + xstart);		// XSTART
@@ -428,15 +405,13 @@ void st7735_setAddressWindow(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1){
 	st7735_lcdDat(y0 + ystart);		// YSTART
 	st7735_lcdDat(0x00);
 	st7735_lcdDat(y1 + ystart);		// YEND
-
-	st7735_lcdCmd(ST7735_RAMWR);	// write to RAM
 }
 
 /*!****************************************************************************
  * @brief Companion code to the above tables.  Reads and issues
  * a series of LCD commands stored in PROGMEM byte array.
  */
-void commandList(const uint8_t *addr){
+void st7735_exeCmdList(const uint8_t *addr){
 	uint8_t	 numCommands, numArgs;
 	uint16_t ms;
 
@@ -453,7 +428,7 @@ void commandList(const uint8_t *addr){
 			if(ms == 255){
 				ms = 500;					// If 255, delay for 500 ms
 			}
-			lcdDelay(ms);
+			delay_ms(ms);
 		}
 	}
 }
@@ -461,23 +436,19 @@ void commandList(const uint8_t *addr){
 /*!****************************************************************************
  * @brief Initialization code common to both 'B' and 'R' type displays
  */
-void commonInit(void) {
-	spiInit();
-
-	gppin_reset(GP_LCD_CS);
-
-	gppin_set(GP_LCD_RST);
-	lcdDelay(10);
+void st7735_commonInit(void){
+    gppin_set(GP_LCD_RST);
+	delay_ms(10);
 	gppin_reset(GP_LCD_RST);
-	lcdDelay(10);
+	delay_ms(10);
 	gppin_set(GP_LCD_RST);
-	lcdDelay(10);
+	delay_ms(10);
 }
 
 /*!****************************************************************************
  * @brief Set rotation display
  */
-void setRotation(uint8_t m){
+void st7735_setRotation(uint8_t m){
 	uint8_t rotation;
 
 	st7735_lcdCmd(ST7735_MADCTL);
@@ -549,8 +520,7 @@ void setRotation(uint8_t m){
 
 		case 3:
 			if ((tabcolor == INITR_BLACKTAB) || (tabcolor == INITR_MINI160x80)) {
-//				st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_RGB);
-                st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_BGR);
+				st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_RGB);
 			} else {
 				st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_BGR);
 			}
@@ -574,8 +544,8 @@ void setRotation(uint8_t m){
 /*!****************************************************************************
  * @brief Set invert display
  */
-void invertDisplay(uint8_t i){
-	if(i != 0){
+void st7735_invertDisplay(bool set){
+	if(set == true){
 		st7735_lcdCmd(ST7735_INVON);
 	}else{
 		st7735_lcdCmd(ST7735_INVOFF);
@@ -585,44 +555,44 @@ void invertDisplay(uint8_t i){
 /*!****************************************************************************
  * @brief Initialization for ST7735B screens
  */
-void initB(void){
-	commonInit();
-    commandList(Rcmd1);
-	setRotation(0);
+void st7735_initB(void){
+	st7735_commonInit();
+    st7735_exeCmdList(Rcmd1);
+	st7735_setRotation(0);
 }
 
 /*!****************************************************************************
  * @brief Initialization for ST7735R screens (green or red tabs)
  */
-void initR(uint8_t options){
-	commonInit();
-    commandList(Rcmd1);
+void st7735_initR(uint8_t options){
+	st7735_commonInit();
+    st7735_exeCmdList(Rcmd1);
 
 	if(options == INITR_GREENTAB){
-		commandList(Rcmd2green);
+		st7735_exeCmdList(Rcmd2green);
 		colstart = 2;
 		rowstart = 1;
 	}
 	else if(options == INITR_144GREENTAB){
 		height = ST7735_TFTHEIGHT_128;
 		width = ST7735_TFTWIDTH_128;
-		commandList(Rcmd2green144);
+		st7735_exeCmdList(Rcmd2green144);
 		colstart = 2;
 		rowstart = 3;
 	}
 	else if(options == INITR_MINI160x80){
 		height = ST7735_TFTHEIGHT_160;
 		width = ST7735_TFTWIDTH_80;
-		commandList(Rcmd2green160x80);
+		st7735_exeCmdList(Rcmd2green160x80);
 		colstart = 26;
 		rowstart = 1;
 	}
 	else{
 		// colstart, rowstart left at default '0' values
-		commandList(Rcmd2red);
+		st7735_exeCmdList(Rcmd2red);
 	}
 
-	commandList(Rcmd3);
+	st7735_exeCmdList(Rcmd3);
 
 	// if black, change MADCTL color filter
 	if((options == INITR_BLACKTAB) || (options == INITR_MINI160x80)){
@@ -632,15 +602,58 @@ void initR(uint8_t options){
 
 	tabcolor = options;
 
-	setRotation(3);
-
-	st7735_setAddressWindow(0, 0, width - 1, height - 1);
+	st7735_setRotation(3);
     
+	st7735_setWndAddr(0, 0, width - 1, height - 1);
+}
+
+/*!****************************************************************************
+ * @brief Initialize controller with specified parameters
+ */
+void st7735_init(void){
+    //Initialize serial interface
+    spiInit();
+	gppin_reset(GP_LCD_CS);
+    //Set initial parameters
+    st7735_initR(INITR_MINI160x80);
+    //Chinese 160x80 display errors
+    st7735_invertDisplay(true);
+    st7735_lcdCmd(ST7735_MADCTL);
+    st7735_lcdDat(MADCTL_MX | MADCTL_MV | MADCTL_BGR);
+    //SPI read test    
+//    cmd = 0x0B;
+//    num = 2;
+//    gppin_reset(GP_LCD_DC);
+//    spiRead(cmd, &rxBff[0], num);
+    //Temporarely fill buffer
     for(uint16_t i = 0; i < (ST7735_W * ST7735_H); i++){
         videoBff[i] = i;
     }
-    
+    //Circuar write to RAM with DMA
+    st7735_lcdCmd(ST7735_RAMWR);
 	initSpiDMA();
+    //Enable backlight
+    gppin_set(GP_LCD_Back);
+}
+
+/*!****************************************************************************
+ * @brief Set sleep ON
+ */
+void st7735_sleepOn(void){
+    gppin_reset(GP_LCD_Back);
+    deInitSpiDMA();
+    st7735_lcdCmd(ST7735_SLPIN);
+}
+
+/*!****************************************************************************
+ * @brief Set sleep OFF
+ */
+void st7735_sleepOff(void){
+    st7735_lcdCmd(ST7735_SLPOUT);
+    delay_ms(500);
+    st7735_lcdCmd(ST7735_RAMWR);
+    initSpiDMA();
+    gppin_set(GP_LCD_Back);
 }
 
 /******************************** END OF FILE ********************************/

@@ -38,6 +38,7 @@
 * Prototypes for the functions
 */
 void delay_us(uint16_t time);
+void delay_ms(uint16_t time);
 
 #endif //Delay_H
 /***************** (C) COPYRIGHT ************** END OF FILE ******** 4eef ****/

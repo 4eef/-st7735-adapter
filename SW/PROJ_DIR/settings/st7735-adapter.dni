@@ -33,7 +33,7 @@ Stop=1
 Freq=10000000
 MultiCoreRunAll=1
 [DebugChecksum]
-Checksum=-570228304
+Checksum=1071031391
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -177,7 +177,8 @@ ShowTiming=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Count=0
+Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\app\src\main.c}.27.11" 0 0 1 "" 0 "" 0
+Count=1
 [Aliases]
 A0=_ "C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\app\src\main.c" ""
 A1=_ "C:\Users\baidachenko.v.ABK-D113\Projects\st7735-adapter\SW\cm0\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f042x6.s" "C:\Users\4eef\Projects\st7735-adapter\SW\cm0\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f042x6.s"

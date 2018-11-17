@@ -21,9 +21,11 @@
 void main(void){
     initClocks();
     initGpios();
-    initR(INITR_MINI160x80);
+    st7735_init();
     
     while(1){
+//        st7735_sleepOn();
+//        st7735_sleepOff();
     }
 }
 
