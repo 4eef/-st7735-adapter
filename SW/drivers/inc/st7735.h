@@ -22,7 +22,9 @@
 #define ST7735_H			160
 #define LCD_SPI				SPI1
 #define LCD_DMA             DMA1_Channel3
-//#define LCD_DMA_STREAM		DMA1_Stream7
+#define LCD_TIM             TIM2
+#define LCD_BRGHT_MAX       100
+#define LCD_BRGHT_MIN       10
 
 /*!****************************************************************************
  * Enumeration
@@ -84,6 +86,7 @@ static inline void st7735_setPixel(uint16_t x, uint16_t y, lcd_color_type color)
 void st7735_init(void);
 void st7735_sleepOn(void);
 void st7735_sleepOff(void);
+void st7735_setBrightness(uint8_t percent);
 
 #endif //st7735_H
 /******************************** END OF FILE ********************************/

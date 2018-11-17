@@ -14,6 +14,7 @@
 #include "stdbool.h"
 #include "gpio.h"
 #include "delay.h"
+#include "clock.h"
 #include "st7735.h"
 
 /*!****************************************************************************
@@ -109,6 +110,13 @@ void st7735_setRotation(uint8_t m);
 void st7735_invertDisplay(bool set);
 void st7735_initB(void);
 void st7735_initR(uint8_t options);
+
+void spiInit(void);
+void initSpiDMA(void);
+void deInitSpiDMA(void);
+void spiSend(uint8_t data);
+void spiRead(uint8_t addr, uint8_t *pRxBff, uint8_t num);
+void timPwmInit(void);
 
 /// Initialization commands for 7735B screens
 const uint8_t Bcmd[] = {
@@ -365,6 +373,23 @@ void spiRead(uint8_t addr, uint8_t *pRxBff, uint8_t num){
     __NOP();
 }
 
+void timPwmInit(void){
+    RCC->APB1ENR    |= RCC_APB1ENR_TIM2EN;
+    LCD_TIM->PSC = F_APB1 / 100000 + 1;
+    LCD_TIM->ARR = LCD_BRGHT_MAX;
+    LCD_TIM->CCR2 = LCD_BRGHT_MAX / 2;
+    LCD_TIM->CCMR1 &= ~(TIM_CCMR1_CC2S_0 | TIM_CCMR1_CC2S_1);//CC2 is output
+    LCD_TIM->CCMR1 |= (TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2);//OC2 is in PWM mode 1
+    LCD_TIM->CCMR1 |= TIM_CCMR1_OC2PE;
+    LCD_TIM->CCER |= TIM_CCER_CC2E;
+    LCD_TIM->CCER &= ~TIM_CCER_CC2P;//Active high
+    LCD_TIM->CR1 |= TIM_CR1_ARPE;
+    LCD_TIM->CR1 &= ~TIM_CR1_DIR;
+    LCD_TIM->CNT = 0;
+    LCD_TIM->CR1 |= TIM_CR1_CEN;
+    LCD_TIM->EGR |= TIM_EGR_UG;
+}
+
 /*!****************************************************************************
  * @brief Send command
  */
@@ -613,7 +638,7 @@ void st7735_initR(uint8_t options){
 void st7735_init(void){
     //Initialize serial interface
     spiInit();
-	gppin_reset(GP_LCD_CS);
+    gppin_reset(GP_LCD_CS);
     //Set initial parameters
     st7735_initR(INITR_MINI160x80);
     //Chinese 160x80 display errors
@@ -631,16 +656,17 @@ void st7735_init(void){
     }
     //Circuar write to RAM with DMA
     st7735_lcdCmd(ST7735_RAMWR);
-	initSpiDMA();
+    initSpiDMA();
     //Enable backlight
-    gppin_set(GP_LCD_Back);
+//    gppin_set(GP_LCD_Back);
+    timPwmInit();
 }
 
 /*!****************************************************************************
  * @brief Set sleep ON
  */
 void st7735_sleepOn(void){
-    gppin_reset(GP_LCD_Back);
+//    gppin_reset(GP_LCD_Back);
     deInitSpiDMA();
     st7735_lcdCmd(ST7735_SLPIN);
 }
@@ -653,7 +679,11 @@ void st7735_sleepOff(void){
     delay_ms(500);
     st7735_lcdCmd(ST7735_RAMWR);
     initSpiDMA();
-    gppin_set(GP_LCD_Back);
+//    gppin_set(GP_LCD_Back);
+}
+
+void st7735_setBrightness(uint8_t percent){
+    
 }
 
 /******************************** END OF FILE ********************************/
