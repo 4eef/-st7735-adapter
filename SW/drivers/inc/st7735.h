@@ -23,8 +23,10 @@
 #define LCD_SPI				SPI1
 #define LCD_DMA             DMA1_Channel3
 #define LCD_TIM             TIM2
-#define LCD_BRGHT_MAX       100
-#define LCD_BRGHT_MIN       10
+#define LCD_BRGHT_MAX       10
+#define LCD_BRGHT_MIN       1
+#define LCD_BRGHT_OFF       0
+#define LCD_BRGHT_FREQ      1000
 
 /*!****************************************************************************
  * Enumeration
@@ -76,7 +78,7 @@ extern uint16_t videoBff[ST7735_W * ST7735_H];
 /*!****************************************************************************
  * Macro functions
  */
-static inline void st7735_setPixel(uint16_t x, uint16_t y, lcd_color_type color){
+inline void st7735_setPixel(uint16_t x, uint16_t y, lcd_color_type color){
 	videoBff[y * ST7735_W + x] = color;
 }
 
@@ -86,7 +88,7 @@ static inline void st7735_setPixel(uint16_t x, uint16_t y, lcd_color_type color)
 void st7735_init(void);
 void st7735_sleepOn(void);
 void st7735_sleepOff(void);
-void st7735_setBrightness(uint8_t percent);
+void st7735_setBrightness(uint8_t level);
 
 #endif //st7735_H
 /******************************** END OF FILE ********************************/

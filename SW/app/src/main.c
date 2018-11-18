@@ -24,8 +24,6 @@ void main(void){
     st7735_init();
     
     while(1){
-//        st7735_sleepOn();
-//        st7735_sleepOff();
     }
 }
 
