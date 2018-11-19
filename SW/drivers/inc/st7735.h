@@ -31,22 +31,7 @@
 /*!****************************************************************************
  * Enumeration
  */
-enum initRflags{
-	INITR_GREENTAB		= 0x0,
-	INITR_REDTAB		= 0x1,
-	INITR_BLACKTAB		= 0x2,
-
-	INITR_18GREENTAB	= INITR_GREENTAB,
-	INITR_18REDTAB		= INITR_REDTAB,
-	INITR_18BLACKTAB	= INITR_BLACKTAB,
-	INITR_144GREENTAB	= 0x1,
-	INITR_MINI160x80	= 0x4
-};
-
-/*!****************************************************************************
- * Typedef
- */
-typedef enum {
+typedef enum{
 	sky = 0x54fb,
 	black = 0x0000,
 	white = 0xFFFF,
@@ -59,33 +44,47 @@ typedef enum {
 	brown = 0x8200,
 	gray = 0x8410,
 	lilac = 0x91D4,
-
 	darkGreen = 0x3DA5,
 	halfLightGray = 0x39E6,
 	halfLightYellow = 0xFFF8,
 	halfLightRed = 0xFF18,
 	halfLightGreen = 0xC7F8,
 	halfLightBlue = 0x861F,
-} color_type;
+}color_type;
 
-typedef uint32_t lcd_color_type;
+/*!****************************************************************************
+ * Typedef
+ */
+typedef struct{
+    uint8_t         colstart;
+    uint8_t         rowstart;
+    uint8_t         xstart;
+    uint8_t         ystart;
+    uint8_t         height;
+    uint8_t         width;
+    uint8_t         tabcolor;
+    uint8_t         brght;
+    uint8_t         brghtPrev;
+    uint16_t        videoBff[ST7735_W * ST7735_H];
+}st7735_type;
 
 /*!****************************************************************************
  * Exported variables
  */
-extern uint16_t videoBff[ST7735_W * ST7735_H];
+extern st7735_type      st7735;
 
 /*!****************************************************************************
  * Macro functions
  */
-inline void st7735_setPixel(uint16_t x, uint16_t y, lcd_color_type color){
-	videoBff[y * ST7735_W + x] = color;
+inline void st7735_setPixel(uint16_t x, uint16_t y, uint16_t color){
+	st7735.videoBff[y * ST7735_W + x] = color;
 }
 
 /*!****************************************************************************
  * Function declaration
  */
 void st7735_init(void);
+void st7735_deInit(void);
 void st7735_sleepOn(void);
 void st7735_sleepOff(void);
 void st7735_setBrightness(uint8_t level);
