@@ -20,7 +20,7 @@ pinMode_type   const pinsMode[] = {
 /*1 */  makepin(GPIOF,  0,  floatingInput,              0,  0),     //RES1
 /*2 */  makepin(GPIOF,  1,  floatingInput,              0,  0),     //RES2
 /*3 */  makepin(GPIOA,  0,  floatingInput,              0,  0),     //RES3
-/*4 */  makepin(GPIOA,  1,  alternateFunctionPushPull,  0,  2),     //LCD_Back
+/*4 */  makepin(GPIOA,  1,  outPushPull,                0,  0),     //LCD_BACK
 /*5 */  makepin(GPIOA,  2,  outPushPull,                0,  0),     //LCD_CS
 /*6 */  makepin(GPIOA,  3,  outPushPull,                0,  0),     //LCD_DC
 /*7 */  makepin(GPIOA,  4,  outPushPull,                0,  0),     //LCD_RES

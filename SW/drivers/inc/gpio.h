@@ -90,7 +90,7 @@ typedef enum{
 /*1 */  GP_RES1,
 /*2 */  GP_RES2,
 /*3 */  GP_RES3,
-/*4 */  GP_LCD_Back,
+/*4 */  GP_LCD_BACK,
 /*5 */  GP_LCD_CS,
 /*6 */  GP_LCD_DC,
 /*7 */  GP_LCD_RST,

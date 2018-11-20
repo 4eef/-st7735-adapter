@@ -398,10 +398,13 @@ void timPwmInit(void){
     LCD_TIM->CNT    = 0;
     LCD_TIM->CR1    |= TIM_CR1_CEN;
     LCD_TIM->EGR    |= TIM_EGR_UG;
+    gppin_init(GPIOA, 1, alternateFunctionPushPull, 0, 2);//LCD_BACK
 }
 
-void timPwmDeinit(void){
+void timPwmDeInit(void){
+    gppin_init(GPIOA, 1, outPushPull, 0, 0);//LCD_BACK
     LCD_TIM->CR1    &= ~TIM_CR1_CEN;
+    LCD_TIM->CCER   &= ~TIM_CCER_CC2E;
     RCC->APB1RSTR   |= RCC_APB1RSTR_TIM2RST;
     RCC->APB1RSTR   &= ~RCC_APB1RSTR_TIM2RST;
     RCC->APB1ENR    &= ~RCC_APB1ENR_TIM2EN;
@@ -719,7 +722,7 @@ void st7735_sleepOff(void){
  */
 void st7735_setBrightness(uint8_t level){
     if(level > LCD_BRGHT_MAX) level = LCD_BRGHT_MAX;
-    if((st7735.brghtPrev == 0) && (st7735.brght == 0)) level = LCD_BRGHT_MAX / 2;
+    if((st7735.brghtPrev == 0) && (st7735.brght == 0)) st7735.brght = level = LCD_BRGHT_MAX / 2;
     st7735.brghtPrev = st7735.brght;
     st7735.brght = level;
     timPwmSet(level * level * level * level);
