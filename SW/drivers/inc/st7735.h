@@ -1,8 +1,8 @@
 /*!****************************************************************************
  * @file		st7735.h
- * @author		d_el
- * @version		V1.0
- * @date		31.01.2018
+ * @author		d_el, 4eef
+ * @version		V1.1
+ * @date		19.11.2018
  * @copyright	The MIT License (MIT). Copyright (c) 2017 Storozhenko Roman
  * @brief		Driver display on controller ST7735
  */

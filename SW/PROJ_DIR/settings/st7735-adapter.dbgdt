@@ -34,7 +34,7 @@
         
         
       <ShowCodeCoverage>1</ShowCodeCoverage><ShowInstrProfiling>1</ShowInstrProfiling></Disassembly>
-    <Register><RegFindHistory/></Register><Locals><col-names><item>Location</item><item>Type</item><item>Value</item><item>Variable</item></col-names><col-widths><item>150</item><item>100</item><item>100</item><item>100</item></col-widths></Locals><WATCH_1><expressions><item>videoBff</item><item>rxBff</item><item>st7735</item><item></item></expressions><col-names><item>Expression</item><item>Location</item><item>Type</item><item>Value</item></col-names><col-widths><item>195</item><item>150</item><item>100</item><item>100</item></col-widths></WATCH_1><Find-in-Files><ColumnWidth0>135</ColumnWidth0><ColumnWidth1>22</ColumnWidth1><ColumnWidth2>202</ColumnWidth2><ColumnWidth3>90</ColumnWidth3></Find-in-Files></Static>
+    <Register><RegFindHistory/></Register><Locals><col-names><item>Location</item><item>Type</item><item>Value</item><item>Variable</item></col-names><col-widths><item>150</item><item>100</item><item>100</item><item>100</item></col-widths></Locals><WATCH_1><expressions><item>videoBff</item><item>rxBff</item><item>st7735</item><item/></expressions><col-names><item>Expression</item><item>Location</item><item>Type</item><item>Value</item></col-names><col-widths><item>195</item><item>150</item><item>100</item><item>100</item></col-widths></WATCH_1><Find-in-Files><ColumnWidth0>135</ColumnWidth0><ColumnWidth1>22</ColumnWidth1><ColumnWidth2>202</ColumnWidth2><ColumnWidth3>90</ColumnWidth3></Find-in-Files></Static>
     <Windows>
       
     <Wnd1>
